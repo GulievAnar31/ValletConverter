@@ -14,16 +14,18 @@ export const CurrencyComponent: React.FC<CurrencyBlockProps> = (props) => {
 
   return <>
     <div className={styles.root}>
-      <h3>Select Your Ammount</h3>
-      <p>{subtitle}</p>
-      <div className={styles.bottom}>
-        <input defaultValue={value} className={styles.input} />
-        <div className={styles.currencyInfo}>
-          <h5>{currencyName}</h5>
-          <img src={currencyIcon} alt="Language" width={45} height={45} />
+      <div className={styles.currency}>
+        <h3>Select Your Ammount</h3>
+        <p>{subtitle}</p>
+        <div className={styles.bottom}>
+          <input defaultValue={value} className={styles.input} />
+          <div className={styles.currencyInfo}>
+            <h5>{currencyName}</h5>
+            <img src={currencyIcon} alt="Language" width={45} height={45} />
+          </div>
         </div>
-        <button>Buy Now</button>
       </div>
+      <button>Buy Now</button>
     </div>
   </>
 };

@@ -10,14 +10,12 @@ const App: React.FC = () => {
     <div className="App">
       <CurrencyComponent
         subtitle='You Pay'
+        twoSubtitle='You Recive'
         currencyName='Usd'
+        twoCurrencyName="Usdc Evmos"
         currencyIcon={Usd}
+        twoIcon={ChangeVallet}
         value={100}
-      />
-      <ValletBlock
-        value={100}
-        currentValueType={'Bitcoin'}
-        changeVallet={ChangeVallet}
       />
     </div>
   );

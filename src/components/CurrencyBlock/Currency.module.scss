@@ -2,11 +2,12 @@
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 25px;
   width: 750px;
+  height: 80%;
   text-align: center;
   color: #fff;
   font-family: 'Space Mono', monospace;
   position: absolute;
-  top: 35%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 40px;
@@ -47,9 +48,9 @@
 .currency {
   border-radius: 25px;
   background-color: #33334b;
-  width: 80%;
   margin: auto;
-  padding: 25px;
+  margin-bottom: 10%;
+  padding: 15px;
 
   .bottom {
     display: flex;

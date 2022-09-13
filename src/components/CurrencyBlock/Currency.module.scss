@@ -44,32 +44,3 @@
     }
   }
 }
-
-.currency {
-  border-radius: 25px;
-  background-color: #33334b;
-  margin: auto;
-  margin-bottom: 10%;
-  padding: 15px;
-
-  .bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .currencyInfo {
-      display: flex;
-      align-items: center;
-
-      img {
-        width: 45px;
-        height: 45px;
-      }
-
-      h5 {
-        font-size: 33px;
-        margin-right: 13px;
-      }
-    }
-  }
-}

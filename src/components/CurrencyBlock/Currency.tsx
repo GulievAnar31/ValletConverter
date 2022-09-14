@@ -4,6 +4,8 @@ import styles from './Currency.module.scss';
 import Usd from '../../images/usd.svg.png';
 import ChangeVallet from '../../images/bitcoin.svg';
 import axios from 'axios';
+import debounce from 'lodash.debounce';
+import { useDebounceEffect } from '../../hooks/useDebounceEffect';
 
 const TARGET_ASSET_ID = "b2384bf2-b14d-4916-aa97-85633ef05742";
 
@@ -26,12 +28,12 @@ export const CurrencyComponent: React.FC = () => {
 
   async function fetchCreateQuote(value: number, isSource: boolean) {
     try {
-      const { data }: any = axios.post<DataType>('https://api-qjoa5a5qtq-uc.a.run.app/quotes', {
+      const { data }: any = await axios.post<DataType>('https://api-qjoa5a5qtq-uc.a.run.app/quotes', {
         source_currency: "USD",
         target_crypto_asset_id: TARGET_ASSET_ID,
-        [isSource ? 'source_amount' : 'target_amount']: '100.0',
+        [isSource ? 'source_amount' : 'target_amount']: `${value}`,
       });
-
+      console.log(data);
       if (isSource) setRecive(Number(data.target_amount))
       else setPay(Number(data.source_amount));
     } catch (err) {
@@ -41,8 +43,12 @@ export const CurrencyComponent: React.FC = () => {
   }
 
   React.useEffect(() => {
-    fetchCreateQuote(pay, false);
+    fetchCreateQuote(pay, true);
   }, []);
+
+  useDebounceEffect(() => {
+    console.log(pay);
+  }, 500, [pay]);
 
   return <>
     <div className={styles.root}>

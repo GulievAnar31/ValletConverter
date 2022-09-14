@@ -46,9 +46,13 @@ export const CurrencyComponent: React.FC = () => {
     fetchCreateQuote(pay, true);
   }, []);
 
-  useDebounceEffect(() => {
-    console.log(pay);
-  }, 500, [pay]);
+  useDebounceEffect({
+    callback: () => {
+      console.log(pay);
+    },
+    delay: 500,
+    deps: [pay]
+  });
 
   return <>
     <div className={styles.root}>

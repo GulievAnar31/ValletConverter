@@ -10,7 +10,7 @@ const ValletMenu = [
   { name: 'Euro', img: Euro },
   { name: 'Ruble', img: Ruble },
   { name: 'Tenge', img: Tenge }
-]
+];
 
 
 interface LogicBlockProps {
@@ -19,18 +19,13 @@ interface LogicBlockProps {
   currencyIcon: string;
   value: number;
   onChangeValue: (val: number) => void;
+  changeIcon?: (value: string, type: string) => void;
 }
 
 export const LogicComponent: React.FC<LogicBlockProps> = (props) => {
-  const { subtitle, value, currencyName, currencyIcon, onChangeValue } = props
+  const { subtitle, value, currencyName, currencyIcon, onChangeValue, changeIcon } = props
   const [valletMenuActive, setValletMenuActive] = React.useState(false);
   const [typeBlock, setTypeBlock] = React.useState(subtitle);
-
-
-  React.useEffect(() => {
-    console.log(typeBlock);
-  }, [typeBlock]);
-
 
   return <div className={styles.currency}>
     <p>{subtitle}</p>
@@ -45,7 +40,10 @@ export const LogicComponent: React.FC<LogicBlockProps> = (props) => {
       </div>
       {valletMenuActive && <div className={styles.valletBlock}>
         {typeBlock === 'vallet' ? ValletMenu.map((item, index) => {
-          return <div className={styles.valletMenu}>
+          return <div onClick={() => {
+            changeIcon && changeIcon(item.name, 'vallet');
+            setValletMenuActive(!valletMenuActive);
+          }} className={styles.valletMenu}>
             <img src={item.img} alt={item.name} />
             <span>{item.name}</span>
           </div>

@@ -26,3 +26,34 @@
     }
   }
 }
+
+.valletBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-radius: 15px;
+  position: absolute;
+  top: 16.5%;
+  left: 15%;
+  width: 70%;
+  height: 20%;
+  background-color: #fff;
+  opacity: 80%;
+  z-index: 100;
+}
+
+.valletMenu {
+  display: grid;
+
+  img {
+    text-align: center;
+    padding-top: 20%;
+    padding-left: 25%;
+    width: 50%;
+    height: 50%;
+  }
+
+  span {
+    text-align: center;
+    color: black;
+  }
+}

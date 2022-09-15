@@ -1,5 +1,17 @@
 import React from 'react';
 import styles from './LogicComponent.module.scss';
+import Dollar from '../../images/dollar.svg';
+import Euro from '../../images/euro.svg';
+import Ruble from '../../images/ruble.svg';
+import Tenge from '../../images/tenge.svg';
+
+const ValletMenu = [
+  { name: 'Dollar', img: Dollar },
+  { name: 'Euro', img: Euro },
+  { name: 'Ruble', img: Ruble },
+  { name: 'Tenge', img: Tenge }
+]
+
 
 interface LogicBlockProps {
   subtitle: string;
@@ -11,6 +23,14 @@ interface LogicBlockProps {
 
 export const LogicComponent: React.FC<LogicBlockProps> = (props) => {
   const { subtitle, value, currencyName, currencyIcon, onChangeValue } = props
+  const [valletMenuActive, setValletMenuActive] = React.useState(false);
+  const [typeBlock, setTypeBlock] = React.useState(subtitle);
+
+
+  React.useEffect(() => {
+    console.log(typeBlock);
+  }, [typeBlock]);
+
 
   return <div className={styles.currency}>
     <p>{subtitle}</p>
@@ -18,8 +38,19 @@ export const LogicComponent: React.FC<LogicBlockProps> = (props) => {
       <input type={'number'} onChange={(e) => onChangeValue(Number(e.target.value))} defaultValue={value} className={styles.input} />
       <div className={styles.currencyInfo}>
         <h5>{currencyName}</h5>
-        <img src={currencyIcon} alt="ChangeVallet" width={50} height={50} />
+        <img src={currencyIcon} alt="ChangeVallet" onClick={() => {
+          setValletMenuActive(!valletMenuActive);
+          setTypeBlock(subtitle === 'You Pay' ? 'vallet' : 'crypto');
+        }} width={50} height={50} />
       </div>
+      {valletMenuActive && <div className={styles.valletBlock}>
+        {typeBlock === 'vallet' ? ValletMenu.map((item, index) => {
+          return <div className={styles.valletMenu}>
+            <img src={item.img} alt={item.name} />
+            <span>{item.name}</span>
+          </div>
+        }) : <div></div>}
+      </div>}
     </div>
   </div>
 }

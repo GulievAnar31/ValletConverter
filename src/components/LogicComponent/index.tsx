@@ -26,11 +26,16 @@ export const LogicComponent: React.FC<LogicBlockProps> = (props) => {
   const { subtitle, value, currencyName, currencyIcon, onChangeValue, changeIcon } = props
   const [valletMenuActive, setValletMenuActive] = React.useState(false);
   const [typeBlock, setTypeBlock] = React.useState(subtitle);
+  const [curentValue, setCurrentValue] = React.useState<number>();
+
+  React.useEffect(() => {
+    setCurrentValue(value)
+  }, [value]);
 
   return <div className={styles.currency}>
     <p>{subtitle}</p>
     <div className={styles.bottom}>
-      <input type={'number'} onChange={(e) => onChangeValue(Number(e.target.value))} defaultValue={value} className={styles.input} />
+      <input type={'number'} onChange={(e) => onChangeValue(Number(e.target.value))} defaultValue={curentValue} className={styles.input} />
       <div className={styles.currencyInfo}>
         <h5>{currencyName}</h5>
         <img src={currencyIcon} alt="ChangeVallet" onClick={() => {

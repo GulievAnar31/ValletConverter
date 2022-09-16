@@ -7,8 +7,7 @@ import Ruble from '../../images/russia.png';
 import Tenge from '../../images/kazakhstan.png';
 import ChangeVallet from '../../images/bitcoin.svg';
 import axios from 'axios';
-import debounce from 'lodash.debounce';
-import { useDebounceEffect } from '../../hooks/useDebounceEffect';
+import { useDebounceFetchCurrency } from '../../hooks/useDebounceEffect';
 
 const ValletIcons = [
   { name: 'Dollar', img: Usd },
@@ -45,6 +44,7 @@ export const CurrencyComponent: React.FC = () => {
         target_crypto_asset_id: TARGET_ASSET_ID,
         [isSource ? 'source_amount' : 'target_amount']: `${value}`,
       });
+      console.log(data);
       if (isSource) setRecive(Number(data.target_amount))
       else setPay(Number(data.source_amount));
     } catch (err) {
@@ -53,6 +53,10 @@ export const CurrencyComponent: React.FC = () => {
     }
   }
 
+  React.useEffect(() => {
+    console.log(recive);
+  }, [recive]);
+
   const changeIcon = (value: string, type: string) => {
     if (type === 'vallet') {
       const currentPay = ValletIcons.filter((item) => item.name === value);
@@ -60,11 +64,7 @@ export const CurrencyComponent: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
-    fetchCreateQuote(pay, true);
-  }, []);
-
-  useDebounceEffect({
+  useDebounceFetchCurrency({
     callback: () => {
       fetchCreateQuote(pay, true);
     },
@@ -87,7 +87,7 @@ export const CurrencyComponent: React.FC = () => {
         subtitle='You Recive'
         currencyName='Usdc Evmos'
         currencyIcon={ChangeVallet}
-        value={100}
+        value={recive}
         onChangeValue={setRecive}
       />
       <button>Buy Now</button>

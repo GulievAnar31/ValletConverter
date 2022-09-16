@@ -7,7 +7,7 @@ interface DebounceEffectProps {
 }
 
 
-export const useDebounceEffect = (props: DebounceEffectProps) => {
+export const useDebounceFetchCurrency = (props: DebounceEffectProps) => {
   const { callback, delay, deps } = props;
   const timerRef = React.useRef<NodeJS.Timeout>();
 
